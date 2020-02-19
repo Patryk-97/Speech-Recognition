@@ -1,7 +1,9 @@
 package com.sriyanksiddhartha.speechtotext;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.RecognitionListener;
@@ -12,6 +14,7 @@ import android.media.AudioManager;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,26 +37,26 @@ public class MainActivity extends AppCompatActivity {
 		this.txvResult = (TextView) findViewById(R.id.txvResult);
 		this.commands = new Commands();
 
-		//Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-		//intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-		//intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.GERMAN);
+		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.GERMAN);
 
-		//while(true)
-		//{
-			//sr.startListening(intent);
-			/*new CountDownTimer(5000, 5000) {
-
-				public void onTick(long millisUntilFinished) {
-					//do nothing, just let it tick
-				}
-
-				public void onFinish() {
-					sr.stopListening();
-				}
-			}.start();*/
-			//sr.stopListening();
-			//sr.startListening(intent);
-		//}
+//		while(true)
+//		{
+//			speechRecognizer.startListening(intent);
+//			new CountDownTimer(5000, 5000) {
+//
+//				public void onTick(long millisUntilFinished) {
+//					//do nothing, just let it tick
+//				}
+//
+//				public void onFinish() {
+//					speechRecognizer.stopListening();
+//				}
+//			}.start();
+//			speechRecognizer.stopListening();
+//			speechRecognizer.startListening(intent);
+//		}
 	}
 
 	public void getSpeechInput(View view) {
@@ -171,7 +174,12 @@ public class MainActivity extends AppCompatActivity {
 		recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
 
 		//if setting.SpeechEnable
-		manager.setStreamMute(AudioManager.STREAM_MUSIC, true);
+//		manager.setStreamMute(AudioManager.STREAM_MUSIC, true);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+			manager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+		} else {
+			manager.setStreamMute(AudioManager.STREAM_MUSIC, true);
+		}
 		speechRecognizer.startListening(recognizerIntent);
 	}
 
