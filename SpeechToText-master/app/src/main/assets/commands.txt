@@ -1,0 +1,23 @@
+Skoñcz 0
+Stop 0
+Zacznij 0
+Start 0
+Nastêpny 0
+Next 0
+Poprzedni 0
+G³oœniej 0
+Louder 0
+Ciszej 0
+Quieter 0
+Wy³¹cz siê 0
+Turn off 0
+Dodaj piosenkê do ulubionych 0
+Add song to favorites 0
+Odtwórz ulubione 0
+Play favorites 0
+Odtwórz album 0
+Play album 0
+Odtwórz 1
+Play 1
+ZnajdŸ 1
+Find 1
